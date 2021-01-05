@@ -11,9 +11,11 @@ final class PromotionPresenter: PromotionPresenterInput {
     
     weak var view: PromotionPageViewControllerInput?
     private var interactor: PromotionInteractorInput
+    private var router: RouterProtocol
     
-    init(interactor: PromotionInteractorInput) {
+    init(interactor: PromotionInteractorInput, router: RouterProtocol) {
         self.interactor = interactor
+        self.router = router
     }
     
     func retrievePromotions() {
@@ -21,7 +23,7 @@ final class PromotionPresenter: PromotionPresenterInput {
     }
     
     func showAlert(with promotion: Promotion?) {
-        
+        router.showSelectedPromotion(with: promotion)
     }
 }
 
@@ -32,6 +34,6 @@ extension PromotionPresenter: PromotionInteractorOutput {
     }
     
     func didRetrieveError(_ error: NSError) {
-        
+        router.showErrorAlert(with: error)
     }
 }

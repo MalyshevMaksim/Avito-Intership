@@ -12,11 +12,35 @@ class PromotionAssembly: AssemblyFactory {
     func buildModule(with service: PromotionServiceProtocol) -> UIViewController {
         
         let view = PromotionPageViewController()
+        let navigation = UINavigationController(rootViewController: view)
+        
         let interactor = PromotionInteractor(service: service)
-        let presenter = PromotionPresenter(interactor: interactor)
+        let router = PromotionRouter(assembly: self)
+        router.navigationController = navigation
+        let presenter = PromotionPresenter(interactor: interactor, router: router)
         presenter.view = view
         interactor.presenter = presenter
         view.presenter = presenter
-        return view
+        return navigation
+    }
+    
+    func buildSelectedPromotionVC(with promotion: Promotion?) -> UIViewController {
+        
+        var alert: UIAlertController
+        
+        if let promotion = promotion {
+            alert = UIAlertController(title: promotion.title, message: "Цена: \(promotion.price)", preferredStyle: .alert)
+        }
+        else {
+            alert = UIAlertController(title: "Услуга не выбрана", message: nil, preferredStyle: .alert)
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return alert
+    }
+    
+    func buildErrorAlert(with error: Error) -> UIViewController {
+        let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return alert
     }
 }

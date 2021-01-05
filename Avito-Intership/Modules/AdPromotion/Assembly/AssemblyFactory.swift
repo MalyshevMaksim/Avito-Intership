@@ -10,4 +10,6 @@ import UIKit.UIViewController
 protocol AssemblyFactory {
 
     func buildModule(with service: PromotionServiceProtocol) -> UIViewController
+    func buildSelectedPromotionVC(with promotion: Promotion?) -> UIViewController
+    func buildErrorAlert(with error: Error) -> UIViewController
 }
