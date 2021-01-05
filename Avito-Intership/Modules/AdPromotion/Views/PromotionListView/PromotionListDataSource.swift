@@ -5,6 +5,7 @@
 //  Created by Малышев Максим Алексеевич on 1/5/21.
 //
 
+import Foundation
 import UIKit
 
 final class PromotionListDataSource: NSObject, UICollectionViewDataSource {

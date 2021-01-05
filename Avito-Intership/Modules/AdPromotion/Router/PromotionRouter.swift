@@ -1,8 +1,8 @@
 //
-//  RouterInput.swift
-//  Avito-Tech-Intership
+//  PromotionRouter.swift
+//  Avito-Intership
 //
-//  Created by Малышев Максим Алексеевич on 1/2/21.
+//  Created by Малышев Максим Алексеевич on 1/5/21.
 //
 
 import Foundation
