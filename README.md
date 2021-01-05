@@ -19,8 +19,8 @@
 
 ### Скриншоты:
 <p align="center">
-  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/1.png" width="250"/>
-  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/2.png" width="250"/>
-  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/3.png" width="250"/>
-  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/4.png" width="250"/>
+  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/1.png" width="350"/>
+  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/2.png" width="350"/>
+  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/4.png" width="350"/>
+  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/3.png" width="350"/>
 </p>
