@@ -20,10 +20,8 @@ final class PromotionInteractor: PromotionInteractorInput {
         service.fetchPromotions() { [unowned self] (result: Result<PromotionResult, Error>) in
             switch result {
                 case .success(let promotions):
-                    print("SUCCESS")
                     presenter?.didRetrievePromotions(promotions)
                 case .failure(let error):
-                    print("ERROR")
                     presenter?.didRetrieveError(error as NSError)
             }
         }

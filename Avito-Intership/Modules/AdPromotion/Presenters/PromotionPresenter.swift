@@ -28,7 +28,7 @@ final class PromotionPresenter: PromotionPresenterInput {
 extension PromotionPresenter: PromotionInteractorOutput {
     
     func didRetrievePromotions(_ promotions: PromotionResult) {
-        print(promotions)
+        view?.providePromotions(promotions.result)
     }
     
     func didRetrieveError(_ error: NSError) {
