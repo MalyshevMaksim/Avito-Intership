@@ -10,12 +10,38 @@ import UIKit
 
 protocol PromotionListCellProtocol: UICollectionViewCell {
     
+    func displayIcon(_ icon: UIImage)
     func configure(with promotion: Promotion)
 }
 
 final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
     
     static var reuseIdentifier = "PromotionListCell"
+    
+    override var isSelected: Bool {
+        didSet {
+            DispatchQueue.main.async {
+                UIView.transition(with: self, duration: 0.15, options: .transitionCrossDissolve, animations: {
+                    self.checkmark.isHidden = !self.isSelected
+                })
+            }
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            DispatchQueue.main.async { [unowned self] in
+                UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                    if isHighlighted {
+                        contentView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                    }
+                    else {
+                        contentView.backgroundColor = .secondarySystemBackground
+                    }
+                })
+            }
+        }
+    }
 
     private lazy var icon: UIImageView = {
         let icon = UIImageView()
@@ -79,25 +105,15 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
     }
     
     func configure(with promotion: Promotion) {
+        titleLabel.text = promotion.title
+        priceLabel.text = promotion.price
+        descriptionLabel.text = promotion.description
+        checkmark.isHidden = !self.isSelected
+    }
+    
+    func displayIcon(_ icon: UIImage) {
         DispatchQueue.main.async { [unowned self] in
-            titleLabel.text = promotion.title
-            priceLabel.text = promotion.price
-            descriptionLabel.text = promotion.description
-        
-            checkmark.isHidden = !isSelected
-        }
-        
-        let service = RemotePromotionService()
-        
-        service.fetchPicutre(for: promotion) { result in
-            switch result {
-                case .success(let image):
-                    DispatchQueue.main.async {
-                        self.icon.image = image
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-            }
+            self.icon.image = icon
         }
     }
     
@@ -131,27 +147,5 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
             verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
             contentView.bottomAnchor.constraint(equalTo: verticalStackView.bottomAnchor, constant: inset)
         ])
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            isSelected ? showCheckmark() : hideCheckmark()
-        }
-    }
-    
-    func showCheckmark() {
-        DispatchQueue.main.async {
-            UIView.transition(with: self, duration: 0.15, options: .transitionCrossDissolve, animations: {
-                self.checkmark.isHidden = false
-            })
-        }
-    }
-    
-    func hideCheckmark() {
-        DispatchQueue.main.async {
-            UIView.transition(with: self, duration: 0.15, options: .transitionCrossDissolve, animations: {
-                self.checkmark.isHidden = true
-            })
-        }
     }
 }

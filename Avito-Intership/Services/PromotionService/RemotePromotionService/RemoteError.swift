@@ -9,9 +9,9 @@ import Foundation
 
 enum RemoteError: Error {
     
-    case badResponse
-    case badStatusCode
-    case badData
-    case decodeError
-    case badUrl
+    case badUrl(reason: String)
+    case badData(reason: String)
+    case badResponse(reason: String)
+    case badStatusCode(reason: String)
+    case badDecode(reason: String)
 }

@@ -8,34 +8,27 @@
 import Foundation
 import UIKit
 
-protocol PromotionPageDelegate {
+class PromotionPageView: UIView, PromotionPageViewInput {
     
-    func didCellSelected()
-    func didCellDeselected()
-}
-
-class PromotionPageView: UIView {
+    var displayManager = PromotionDataDisplayManager()
     
-    var dataSource = PromotionListDataSource()
-    var delegate = PromotionListDelegate()
-    
-    lazy var closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "close"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var promotionsList: PromotionListView = {
+    private lazy var promotionCollection: PromotionListView = {
         let promotionsList = PromotionListView()
         promotionsList.backgroundColor = .systemBackground
-        promotionsList.dataSource = dataSource
-        promotionsList.delegate = delegate
+        promotionsList.dataSource = displayManager
+        promotionsList.delegate = displayManager
         promotionsList.translatesAutoresizingMaskIntoConstraints = false
         return promotionsList
     }()
     
-    lazy var selectionButton: UIButton = {
+    private lazy var selectionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.3019607843, green: 0.6705882353, blue: 1, alpha: 1)
@@ -47,8 +40,18 @@ class PromotionPageView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        delegate.del = self
+        displayManager.output = self
         setupView()
+        selectionButton.addTarget(self, action: #selector(add), for: .touchUpInside)
+    }
+    
+    @objc private func add() {
+        guard let indexPath = promotionCollection.indexPathsForSelectedItems?.first else {
+            displayManager.presenter.showPromotionDetail(with: nil)
+            return
+        }
+        let promotion = displayManager.presenter.providePromotion(from: indexPath)
+        displayManager.presenter.showPromotionDetail(with: promotion)
     }
     
     required init?(coder: NSCoder) {
@@ -57,15 +60,14 @@ class PromotionPageView: UIView {
     
     func configure(page: PromotionPage) {
         DispatchQueue.main.async { [unowned self] in
-            dataSource.promotionPage = page
-            selectionButton.setTitle(dataSource.promotionPage?.actionTitle, for: .normal)
-            promotionsList.reloadData()
+            selectionButton.setTitle(page.actionTitle, for: .normal)
+            promotionCollection.reloadData()
         }
     }
     
     private func setupSubviews() {
         addSubview(closeButton)
-        addSubview(promotionsList)
+        addSubview(promotionCollection)
         addSubview(selectionButton)
     }
     
@@ -80,10 +82,10 @@ class PromotionPageView: UIView {
             closeButton.widthAnchor.constraint(equalToConstant: 28),
             closeButton.heightAnchor.constraint(equalToConstant: 28),
             
-            promotionsList.leadingAnchor.constraint(equalTo: leadingAnchor),
-            promotionsList.trailingAnchor.constraint(equalTo: trailingAnchor),
-            promotionsList.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: inset),
-            promotionsList.bottomAnchor.constraint(equalTo: selectionButton.topAnchor),
+            promotionCollection.leadingAnchor.constraint(equalTo: leadingAnchor),
+            promotionCollection.trailingAnchor.constraint(equalTo: trailingAnchor),
+            promotionCollection.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: inset),
+            promotionCollection.bottomAnchor.constraint(equalTo: selectionButton.topAnchor),
             
             selectionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
             selectionButton.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -94,13 +96,11 @@ class PromotionPageView: UIView {
     }
 }
 
-extension PromotionPageView: PromotionPageDelegate {
+extension PromotionPageView: PromotionPageViewOutput {
     
-    func didCellSelected() {
-        selectionButton.setTitle(dataSource.promotionPage?.selectedActionTitle, for: .normal)
-    }
-    
-    func didCellDeselected() {
-        selectionButton.setTitle(dataSource.promotionPage?.actionTitle, for: .normal)
+    func didCellSelected(message: String) {
+        DispatchQueue.main.async { [unowned self] in
+            selectionButton.setTitle(message, for: .normal)
+        }
     }
 }

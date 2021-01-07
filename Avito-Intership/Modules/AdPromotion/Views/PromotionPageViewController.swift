@@ -9,20 +9,19 @@ import UIKit
 
 final class PromotionPageViewController: UIViewController {
     
-    var presenter: PromotionPresenterInput?
-    private var pageView = PromotionPageView()
+    var presenter: PromotionViewOutput?
+    var pageView = PromotionPageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
-        presenter?.retrievePromotions()
-        setupPageView()
+        presenter?.retrievePromtions()
+        setupView()
     }
     
-    private func setupPageView() {
+    private func setupView() {
         view.addSubview(pageView)
-        pageView.selectionButton.addTarget(self, action: #selector(tap), for: .touchUpInside)
         pageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -32,19 +31,11 @@ final class PromotionPageViewController: UIViewController {
             pageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    @objc private func tap() {
-        guard let selectedCellIndex = pageView.promotionsList.indexPathsForSelectedItems?.first?.row else {
-            presenter?.showAlert(with: nil)
-            return
-        }
-        presenter?.showAlert(with: pageView.dataSource.promotionPage?.list[selectedCellIndex])
-    }
 }
 
-extension PromotionPageViewController: PromotionPageViewControllerInput {
+extension PromotionPageViewController: PromotionViewInput {
     
-    func providePromotions(_ promotionPage: PromotionPage) {
+    func showPromotions(_ promotionPage: PromotionPage) {
         pageView.configure(page: promotionPage)
     }
 }
