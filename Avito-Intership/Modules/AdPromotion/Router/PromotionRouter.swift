@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-final class PromotionRouter: BasePromotionRouter, RouterProtocol {
+final class PromotionRouter: BasePromotionRouter, RouterInput {
     
-    func showSelectedPromotion(with promotion: Promotion?) {
+    func showPromotionDetail(with promotion: Promotion?) {
         presentViewController { navigationController -> UIViewController in
-            return assembly.buildSelectedPromotionVC(with: promotion)
+            return assembly.buildSelectedPromotionViewController(with: promotion)
         }
     }
     
     func showErrorAlert(with error: NSError) {
         presentViewController { navigationController -> UIViewController in
-            return assembly.buildErrorAlert(with: error)
+            return assembly.buildErrorMessageViewController(with: error)
         }
     }
 }

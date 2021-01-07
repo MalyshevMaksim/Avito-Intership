@@ -10,10 +10,8 @@ import UIKit.UIViewController
 class PromotionAssembly: AssemblyFactory {
     
     func buildModule(with service: PromotionServiceProtocol) -> UIViewController {
-        
         let view = PromotionPageViewController()
         let navigation = UINavigationController(rootViewController: view)
-        
         let interactor = PromotionInteractor(service: service)
         let router = PromotionRouter(assembly: self)
         router.navigationController = navigation
@@ -21,11 +19,11 @@ class PromotionAssembly: AssemblyFactory {
         presenter.view = view
         interactor.presenter = presenter
         view.presenter = presenter
+        view.pageView.displayManager.presenter = presenter
         return navigation
     }
     
-    func buildSelectedPromotionVC(with promotion: Promotion?) -> UIViewController {
-        
+    func buildSelectedPromotionViewController(with promotion: Promotion?) -> UIViewController {
         var alert: UIAlertController
         
         if let promotion = promotion {
@@ -38,7 +36,7 @@ class PromotionAssembly: AssemblyFactory {
         return alert
     }
     
-    func buildErrorAlert(with error: Error) -> UIViewController {
+    func buildErrorMessageViewController(with error: Error) -> UIViewController {
         let alert = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         return alert

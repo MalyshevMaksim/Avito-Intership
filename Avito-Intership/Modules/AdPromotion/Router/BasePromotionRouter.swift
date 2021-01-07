@@ -6,12 +6,11 @@
 //
 
 import Foundation
-
 import UIKit
 
-protocol RouterProtocol {
+protocol RouterInput {
     
-    func showSelectedPromotion(with promotion: Promotion?)
+    func showPromotionDetail(with promotion: Promotion?)
     func showErrorAlert(with error: NSError)
 }
 

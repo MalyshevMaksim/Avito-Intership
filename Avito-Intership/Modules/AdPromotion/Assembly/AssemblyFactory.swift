@@ -8,8 +8,7 @@
 import UIKit.UIViewController
 
 protocol AssemblyFactory {
-
     func buildModule(with service: PromotionServiceProtocol) -> UIViewController
-    func buildSelectedPromotionVC(with promotion: Promotion?) -> UIViewController
-    func buildErrorAlert(with error: Error) -> UIViewController
+    func buildSelectedPromotionViewController(with promotion: Promotion?) -> UIViewController
+    func buildErrorMessageViewController(with error: Error) -> UIViewController
 }
