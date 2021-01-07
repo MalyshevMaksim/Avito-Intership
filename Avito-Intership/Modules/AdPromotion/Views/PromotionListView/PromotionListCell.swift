@@ -105,10 +105,12 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
     }
     
     func configure(with promotion: Promotion) {
-        titleLabel.text = promotion.title
-        priceLabel.text = promotion.price
-        descriptionLabel.text = promotion.description
-        checkmark.isHidden = !self.isSelected
+        DispatchQueue.main.async { [unowned self] in
+            titleLabel.text = promotion.title
+            priceLabel.text = promotion.price
+            descriptionLabel.text = promotion.description
+            checkmark.isHidden = !self.isSelected
+        }
     }
     
     func displayIcon(_ icon: UIImage) {

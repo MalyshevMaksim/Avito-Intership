@@ -37,7 +37,7 @@ final class PromotionListViewHeader: UICollectionReusableView {
             label.leadingAnchor.constraint(equalTo: leadingAnchor),
             label.trailingAnchor.constraint(equalTo: trailingAnchor),
             label.topAnchor.constraint(equalTo: topAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor)
+            bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 16)
         ])
     }
 }

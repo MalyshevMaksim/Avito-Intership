@@ -84,7 +84,7 @@ class PromotionPageView: UIView, PromotionPageViewInput {
             
             promotionCollection.leadingAnchor.constraint(equalTo: leadingAnchor),
             promotionCollection.trailingAnchor.constraint(equalTo: trailingAnchor),
-            promotionCollection.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: inset),
+            promotionCollection.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: inset * 2),
             promotionCollection.bottomAnchor.constraint(equalTo: selectionButton.topAnchor),
             
             selectionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),

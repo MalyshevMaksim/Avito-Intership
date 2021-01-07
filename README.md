@@ -23,12 +23,10 @@
 + Чтобы вручную не вызывать Assembly из кода, можно использовать одну из библиотеку для Dependency Injection, например [Swinject](https://github.com/Swinject/Swinject) или [Typhoon](https://github.com/appsquickly/Typhoon).
 + Сложность создания модулей - один из недостатков VIPER. Для того чтобы внедрить новый модуль, необходимо создать множество классов и протоколов. Слишком много времени уходит на механическую работу. Для того чтобы минимизировать временные затраты на создание модулей, можно использовать утилиты для кодогенерации VIPER-компонентов, например [Generamba](https://github.com/rambler-digital-solutions/Generamba).
 
-### Скриншоты:
+### Скриншоты:/var/folders/y2/ztgccrxn20b48tb1xsvdtr800000gn/T/simulator_screenshot_ED10ED18-A6F7-4129-9994-EC6024D6A3C5.png
 <p align="center">
   <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/1.png" width="350"/>
   <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/2.png" width="350"/>
-  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/4.png" width="350"/>
-  <img src = "https://github.com/MalyshevMaksim/Avito-Intership/blob/main/Screenshots/3.png" width="350"/>
 </p>
 
 ### Gif:

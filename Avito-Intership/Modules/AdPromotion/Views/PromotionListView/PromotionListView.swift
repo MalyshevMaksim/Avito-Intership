@@ -32,15 +32,6 @@ final class PromotionListView: UICollectionView {
 
     private func makePromotionListLayout(isPortrait: Bool) -> NSCollectionLayoutSection {
         
-        var headerHeightDimension: CGFloat
-        
-        if isPortrait {
-            headerHeightDimension = 110
-        }
-        else {
-            headerHeightDimension = 55
-        }
-        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .fixed(10), trailing: .none, bottom: .none)
@@ -48,7 +39,7 @@ final class PromotionListView: UICollectionView {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeightDimension))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PromotionListView.sectionHeaderElementKind, alignment: .top)
         header.pinToVisibleBounds = true
         
