@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
-        window?.rootViewController = PromotionAssembly().buildModule(with: RemotePromotionService())
+        window?.rootViewController = PromotionAssembly().buildModule(with: RemotePromotionService(), navigation: UINavigationController())
     }
 }
 

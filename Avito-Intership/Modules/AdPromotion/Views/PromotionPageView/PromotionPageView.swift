@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 
-class PromotionPageView: UIView, PromotionPageViewInput {
+final class PromotionPageView: UIView, PromotionPageViewProtocol {
     
-    var displayManager = PromotionDataDisplayManager()
+    private var displayManager = PromotionDataDisplayManager()
+    var delegate: PromotionPageViewDelegate?
     
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -40,18 +41,18 @@ class PromotionPageView: UIView, PromotionPageViewInput {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        displayManager.output = self
+        displayManager.delegate = self
+        selectionButton.addTarget(self, action: #selector(chooseButtonClicked), for: .touchUpInside)
         setupView()
-        selectionButton.addTarget(self, action: #selector(add), for: .touchUpInside)
     }
     
-    @objc private func add() {
+    @objc private func chooseButtonClicked() {
         guard let indexPath = promotionCollection.indexPathsForSelectedItems?.first else {
-            displayManager.presenter.showPromotionDetail(with: nil)
+            delegate?.didChooseButtonClicked(self, with: nil)
             return
         }
-        let promotion = displayManager.presenter.providePromotion(from: indexPath)
-        displayManager.presenter.showPromotionDetail(with: promotion)
+        let promotion = displayManager.getPromotion(from: indexPath)
+        delegate?.didChooseButtonClicked(self, with: promotion)
     }
     
     required init?(coder: NSCoder) {
@@ -60,6 +61,7 @@ class PromotionPageView: UIView, PromotionPageViewInput {
     
     func configure(page: PromotionPage) {
         DispatchQueue.main.async { [unowned self] in
+            displayManager.setPromotionPage(promotion: page)
             selectionButton.setTitle(page.actionTitle, for: .normal)
             promotionCollection.reloadData()
         }
@@ -96,11 +98,17 @@ class PromotionPageView: UIView, PromotionPageViewInput {
     }
 }
 
-extension PromotionPageView: PromotionPageViewOutput {
+extension PromotionPageView: DisplayManagerDelegate {
     
-    func didCellSelected(message: String) {
+    func didCellSelected(_ displayManager: PromotionDataDisplayManager, with title: String) {
         DispatchQueue.main.async { [unowned self] in
-            selectionButton.setTitle(message, for: .normal)
+            selectionButton.setTitle(title, for: .normal)
+        }
+    }
+    
+    func didCellDeselected(_ displayManager: PromotionDataDisplayManager, with title: String) {
+        DispatchQueue.main.async { [unowned self] in
+            selectionButton.setTitle(title, for: .normal)
         }
     }
 }

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 protocol RouterInput {
-    
     func showPromotionDetail(with promotion: Promotion?)
     func showErrorAlert(with error: NSError)
 }
@@ -23,9 +22,9 @@ class BasePromotionRouter {
         self.assembly = assembly
     }
     
-    func presentViewController(deriveViewController: (UINavigationController) -> UIViewController) {
+    func presentViewController(viewControllerDerivedFrom: (UINavigationController) -> UIViewController) {
         if let navigationController = navigationController {
-            let viewController = deriveViewController(navigationController)
+            let viewController = viewControllerDerivedFrom(navigationController)
             navigationController.present(viewController, animated: true, completion: nil)
         }
     }

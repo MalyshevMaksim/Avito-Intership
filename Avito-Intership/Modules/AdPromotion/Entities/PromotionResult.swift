@@ -8,7 +8,6 @@
 import Foundation
 
 struct PromotionResult: Codable {
-    
     var status: String
     var result: PromotionPage
 }

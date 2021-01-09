@@ -7,19 +7,18 @@
 
 import UIKit.UIViewController
 
-class PromotionAssembly: AssemblyFactory {
+final class PromotionAssembly: AssemblyFactory {
     
-    func buildModule(with service: PromotionServiceProtocol) -> UIViewController {
+    func buildModule(with service: PromotionServiceProtocol, navigation: UINavigationController) -> UIViewController {
         let view = PromotionPageViewController()
-        let navigation = UINavigationController(rootViewController: view)
         let interactor = PromotionInteractor(service: service)
         let router = PromotionRouter(assembly: self)
-        router.navigationController = navigation
         let presenter = PromotionPresenter(interactor: interactor, router: router)
         presenter.view = view
         interactor.presenter = presenter
         view.presenter = presenter
-        view.pageView.displayManager.presenter = presenter
+        router.navigationController = navigation
+        navigation.viewControllers = [view]
         return navigation
     }
     

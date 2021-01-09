@@ -9,13 +9,14 @@ import UIKit
 
 final class PromotionPageViewController: UIViewController {
     
-    var presenter: PromotionViewOutput?
-    var pageView = PromotionPageView()
+    private var pageView = PromotionPageView()
+    var presenter: PromotionPresenterInput?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
+        pageView.delegate = self
         presenter?.retrievePromtions()
         setupView()
     }
@@ -33,7 +34,14 @@ final class PromotionPageViewController: UIViewController {
     }
 }
 
-extension PromotionPageViewController: PromotionViewInput {
+extension PromotionPageViewController: PromotionPageViewDelegate {
+    
+    func didChooseButtonClicked(_ promotionPageView: PromotionPageView, with selectedPromotion: Promotion?) {
+        presenter?.showPromotionDetail(with: selectedPromotion)
+    }
+}
+
+extension PromotionPageViewController: PromotionPageViewControllerProtocol {
     
     func showPromotions(_ promotionPage: PromotionPage) {
         pageView.configure(page: promotionPage)

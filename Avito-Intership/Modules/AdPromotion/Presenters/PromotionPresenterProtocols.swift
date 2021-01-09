@@ -13,10 +13,6 @@ protocol PromotionPresenterInput {
     func showPromotionDetail(with promotion: Promotion?)
     func showErrorAlert(with error: NSError)
     
-    func provideIcon(for promotion: Promotion) -> UIImage
-    func providePromotion(from indexPath: IndexPath) -> Promotion?
-    
-    func provideNumberOfPromotions() -> Int
-    func provideButtonTitle(isSelected: Bool) -> String
-    func providePageTitle() -> String
+    func retrievePromtions()
+    func retrieveIcon(for promotion: Promotion) -> UIImage
 }

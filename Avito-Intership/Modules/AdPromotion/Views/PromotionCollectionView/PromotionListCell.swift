@@ -84,17 +84,6 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
         return label
     }()
     
-    private lazy var verticalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(descriptionLabel)
-        stackView.addArrangedSubview(priceLabel)
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
@@ -105,12 +94,10 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
     }
     
     func configure(with promotion: Promotion) {
-        DispatchQueue.main.async { [unowned self] in
-            titleLabel.text = promotion.title
-            priceLabel.text = promotion.price
-            descriptionLabel.text = promotion.description
-            checkmark.isHidden = !self.isSelected
-        }
+        titleLabel.text = promotion.title
+        priceLabel.text = promotion.price
+        descriptionLabel.text = promotion.description
+        checkmark.isHidden = !self.isSelected
     }
     
     func displayIcon(_ icon: UIImage) {
@@ -122,7 +109,9 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
     private func setupSubviews() {
         contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = 5
-        contentView.addSubview(verticalStackView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(priceLabel)
         contentView.addSubview(icon)
         contentView.addSubview(checkmark)
     }
@@ -144,10 +133,18 @@ final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
             checkmark.heightAnchor.constraint(equalToConstant: 24),
             checkmark.widthAnchor.constraint(equalToConstant: 24),
             
-            verticalStackView.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: inset),
-            verticalStackView.trailingAnchor.constraint(equalTo: checkmark.leadingAnchor, constant: -inset),
-            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            contentView.bottomAnchor.constraint(equalTo: verticalStackView.bottomAnchor, constant: inset)
+            titleLabel.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: inset),
+            titleLabel.trailingAnchor.constraint(equalTo: checkmark.leadingAnchor, constant: -inset),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
+            
+            descriptionLabel.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: inset),
+            descriptionLabel.trailingAnchor.constraint(equalTo: checkmark.leadingAnchor, constant: -inset),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            
+            priceLabel.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: inset),
+            priceLabel.trailingAnchor.constraint(equalTo: checkmark.leadingAnchor, constant: -inset),
+            priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5),
+            contentView.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: inset)
         ])
     }
 }

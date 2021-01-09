@@ -8,13 +8,21 @@
 import Foundation
 import UIKit
 
-final class PromotionDataDisplayManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+final class PromotionDataDisplayManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, DisplayManagerProtocol {
     
-    var presenter: PromotionPresenterInput!
-    var output: PromotionPageViewOutput?
+    private var promotionPage: PromotionPage?
+    var delegate: DisplayManagerDelegate?
+    
+    func setPromotionPage(promotion page: PromotionPage) {
+        self.promotionPage = page
+    }
+    
+    func getPromotion(from indexPath: IndexPath) -> Promotion? {
+        return promotionPage?.list[indexPath.row]
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.provideNumberOfPromotions()
+        return promotionPage?.list.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -22,11 +30,10 @@ final class PromotionDataDisplayManager: NSObject, UICollectionViewDataSource, U
         let reuseIdentitfier = PromotionListCell.reuseIdentifier
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentitfier, for: indexPath) as? PromotionListCellProtocol,
-              let promotion = presenter.providePromotion(from: indexPath) else {
+              let promotion = promotionPage?.list[indexPath.row] else {
             return UICollectionViewCell()
         }
-        let icon = presenter.provideIcon(for: promotion)
-        cell.displayIcon(icon)
+        cell.displayIcon(UIImage(named: "checkmark")!)
         cell.configure(with: promotion)
         return cell
     }
@@ -35,10 +42,8 @@ final class PromotionDataDisplayManager: NSObject, UICollectionViewDataSource, U
         
         let kind = PromotionListView.sectionHeaderElementKind
         let reuseIdentitfier = PromotionListViewHeader.reuseIdentifier
-        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentitfier, for: indexPath) as! PromotionListViewHeader
-        
-        header.label.text = presenter.providePageTitle()
+        header.label.text = promotionPage?.title
         return header
     }
     
@@ -46,15 +51,14 @@ final class PromotionDataDisplayManager: NSObject, UICollectionViewDataSource, U
         guard let cell = collectionView.cellForItem(at: indexPath) as? PromotionListCellProtocol else {
             return false
         }
-        
         if cell.isSelected {
             collectionView.deselectItem(at: indexPath, animated: true)
-            output?.didCellSelected(message: presenter.provideButtonTitle(isSelected: true))
+            delegate?.didCellSelected(self, with: promotionPage?.actionTitle ?? "")
             return false
         }
         else {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
-            output?.didCellSelected(message: presenter.provideButtonTitle(isSelected: false))
+            delegate?.didCellDeselected(self, with: promotionPage?.selectedActionTitle ?? "")
             return true
         }
     }

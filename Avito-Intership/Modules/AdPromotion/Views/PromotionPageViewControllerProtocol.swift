@@ -7,11 +7,6 @@
 
 import UIKit.UIImage
 
-protocol PromotionViewInput: class {
+protocol PromotionPageViewControllerProtocol: class {
     func showPromotions(_ promotionPage: PromotionPage)
-}
-
-protocol PromotionViewOutput: class {
-    func retrievePromtions()
-    func showSelectedPromotion(from indexPath: IndexPath?)
 }

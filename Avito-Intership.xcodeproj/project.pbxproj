@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B503FC6825A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503FC6725A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift */; };
 		B566DD3525A4A68A00B46E30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD3425A4A68A00B46E30 /* AppDelegate.swift */; };
 		B566DD3725A4A68A00B46E30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD3625A4A68A00B46E30 /* SceneDelegate.swift */; };
 		B566DD3925A4A68A00B46E30 /* PromotionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD3825A4A68A00B46E30 /* PromotionPageViewController.swift */; };
@@ -25,7 +26,7 @@
 		B566DD7D25A4B11000B46E30 /* PromotionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD7C25A4B11000B46E30 /* PromotionPresenter.swift */; };
 		B566DD8125A4B2C600B46E30 /* AssemblyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD8025A4B2C600B46E30 /* AssemblyFactory.swift */; };
 		B566DD8425A4B2F300B46E30 /* PromotionAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD8325A4B2F300B46E30 /* PromotionAssembly.swift */; };
-		B566DD8725A4B5B500B46E30 /* PromotionViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD8625A4B5B500B46E30 /* PromotionViewProtocols.swift */; };
+		B566DD8725A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD8625A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift */; };
 		B566DDCD25A4E40B00B46E30 /* BasePromotionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DDCC25A4E40B00B46E30 /* BasePromotionRouter.swift */; };
 		B566DDD025A4E42300B46E30 /* PromotionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DDCF25A4E42300B46E30 /* PromotionRouter.swift */; };
 		B566DDD325A4E44800B46E30 /* PromotionPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DDD225A4E44800B46E30 /* PromotionPageView.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B503FC6725A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDisplayManagerProtocols.swift; sourceTree = "<group>"; };
 		B566DD3125A4A68A00B46E30 /* Avito-Intership.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avito-Intership.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566DD3425A4A68A00B46E30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B566DD3625A4A68A00B46E30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +60,7 @@
 		B566DD7C25A4B11000B46E30 /* PromotionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPresenter.swift; sourceTree = "<group>"; };
 		B566DD8025A4B2C600B46E30 /* AssemblyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactory.swift; sourceTree = "<group>"; };
 		B566DD8325A4B2F300B46E30 /* PromotionAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionAssembly.swift; sourceTree = "<group>"; };
-		B566DD8625A4B5B500B46E30 /* PromotionViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionViewProtocols.swift; sourceTree = "<group>"; };
+		B566DD8625A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPageViewControllerProtocol.swift; sourceTree = "<group>"; };
 		B566DDCC25A4E40B00B46E30 /* BasePromotionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePromotionRouter.swift; sourceTree = "<group>"; };
 		B566DDCF25A4E42300B46E30 /* PromotionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionRouter.swift; sourceTree = "<group>"; };
 		B566DDD225A4E44800B46E30 /* PromotionPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPageView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B503FC6325A89615000EBFF1 /* PromotionDisplayManager */ = {
+			isa = PBXGroup;
+			children = (
+				B503FC6725A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift */,
+				B58C0D8125A6ECB7002E11F8 /* PromotionDataDisplayManager.swift */,
+			);
+			path = PromotionDisplayManager;
+			sourceTree = "<group>";
+		};
 		B566DD2825A4A68A00B46E30 = {
 			isa = PBXGroup;
 			children = (
@@ -181,10 +192,11 @@
 		B566DD6A25A4B00300B46E30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B566DD8625A4B5B500B46E30 /* PromotionViewProtocols.swift */,
+				B566DD8625A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift */,
 				B566DD3825A4A68A00B46E30 /* PromotionPageViewController.swift */,
+				B503FC6325A89615000EBFF1 /* PromotionDisplayManager */,
 				B58C0D8825A70161002E11F8 /* PromotionPageView */,
-				B566DDD525A4E45D00B46E30 /* PromotionListView */,
+				B566DDD525A4E45D00B46E30 /* PromotionCollectionView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -225,14 +237,14 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
-		B566DDD525A4E45D00B46E30 /* PromotionListView */ = {
+		B566DDD525A4E45D00B46E30 /* PromotionCollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				B566DDDF25A4E4DF00B46E30 /* PromotionListView.swift */,
 				B566DDDC25A4E4CA00B46E30 /* PromotionListCell.swift */,
 				B566DDE225A4E4FB00B46E30 /* PromotionListHeaderView.swift */,
 			);
-			path = PromotionListView;
+			path = PromotionCollectionView;
 			sourceTree = "<group>";
 		};
 		B566DDE525A4E51C00B46E30 /* Extensions */ = {
@@ -248,7 +260,6 @@
 			children = (
 				B58C0D8A25A70177002E11F8 /* PromotionPageViewProtocols.swift */,
 				B566DDD225A4E44800B46E30 /* PromotionPageView.swift */,
-				B58C0D8125A6ECB7002E11F8 /* PromotionDataDisplayManager.swift */,
 			);
 			path = PromotionPageView;
 			sourceTree = "<group>";
@@ -326,9 +337,10 @@
 				B566DDE025A4E4DF00B46E30 /* PromotionListView.swift in Sources */,
 				B566DD7D25A4B11000B46E30 /* PromotionPresenter.swift in Sources */,
 				B566DD3925A4A68A00B46E30 /* PromotionPageViewController.swift in Sources */,
-				B566DD8725A4B5B500B46E30 /* PromotionViewProtocols.swift in Sources */,
+				B566DD8725A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift in Sources */,
 				B566DD5A25A4A9A000B46E30 /* Promotion.swift in Sources */,
 				B566DD3525A4A68A00B46E30 /* AppDelegate.swift in Sources */,
+				B503FC6825A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift in Sources */,
 				B566DDCD25A4E40B00B46E30 /* BasePromotionRouter.swift in Sources */,
 				B566DD5E25A4A9EF00B46E30 /* RemotePromotionService.swift in Sources */,
 				B566DDDD25A4E4CA00B46E30 /* PromotionListCell.swift in Sources */,

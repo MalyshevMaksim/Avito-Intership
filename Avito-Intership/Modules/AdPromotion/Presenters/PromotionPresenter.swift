@@ -10,11 +10,9 @@ import UIKit.UIImage
 
 final class PromotionPresenter: PromotionPresenterInput {
     
-    weak var view: PromotionViewInput?
+    weak var view: PromotionPageViewControllerProtocol?
     private var interactor: PromotionInteractorInput
     private var router: RouterInput
-    
-    private var receivedPromotions: PromotionPage!
     
     // Словарь хранит соответствие id объявления и его иконки
     private var receivedIcons: [String : UIImage] = [:]
@@ -32,52 +30,16 @@ final class PromotionPresenter: PromotionPresenterInput {
         router.showErrorAlert(with: error)
     }
     
-    func providePromotion(from indexPath: IndexPath) -> Promotion? {
-        return receivedPromotions?.list[indexPath.row]
+    func retrievePromtions() {
+        interactor.retrievePromotions()
     }
     
-    func provideIcon(for promotion: Promotion) -> UIImage {
+    func retrieveIcon(for promotion: Promotion) -> UIImage {
         guard let icon = receivedIcons[promotion.id] else {
             interactor.retrieveIcon(for: promotion)
             return UIImage(named: "checkmark")!
         }
         return icon
-    }
-    
-    func provideNumberOfPromotions() -> Int {
-        guard let promotions = receivedPromotions else {
-            return 0
-        }
-        return promotions.list.count
-    }
-    
-    func provideButtonTitle(isSelected: Bool) -> String {
-        if isSelected {
-            return receivedPromotions.actionTitle
-        }
-        else {
-            return receivedPromotions.selectedActionTitle
-        }
-    }
-    
-    func providePageTitle() -> String {
-        return receivedPromotions.title
-    }
-}
-
-extension PromotionPresenter: PromotionViewOutput {
-    
-    func retrievePromtions() {
-        interactor.retrievePromotions()
-    }
-    
-    func showSelectedPromotion(from indexPath: IndexPath?) {
-        guard let indexPath = indexPath else {
-            showPromotionDetail(with: nil)
-            return
-        }
-        let promotion = receivedPromotions?.list[indexPath.row]
-        showPromotionDetail(with: promotion)
     }
 }
 
@@ -88,7 +50,6 @@ extension PromotionPresenter: PromotionInteractorOutput {
     }
     
     func didRetrievePromotions(_ promotions: PromotionResult) {
-        receivedPromotions = promotions.result
         view?.showPromotions(promotions.result)
     }
     

@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol PromotionPageViewInput: class {
+protocol PromotionPageViewProtocol: class {
     func configure(page: PromotionPage)
 }
 
-protocol PromotionPageViewOutput: class {
-    func didCellSelected(message: String)
+protocol PromotionPageViewDelegate: class {
+    func didChooseButtonClicked(_ promotionPageView: PromotionPageView, with selectedPromotion: Promotion?)
 }

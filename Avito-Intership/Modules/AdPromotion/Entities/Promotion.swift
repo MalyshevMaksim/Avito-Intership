@@ -8,7 +8,6 @@
 import Foundation
 
 struct Promotion: Codable {
-    
     var id: String
     var title: String
     var description: String?

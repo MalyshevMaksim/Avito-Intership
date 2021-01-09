@@ -42,10 +42,9 @@ final class PromotionListView: UICollectionView {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PromotionListView.sectionHeaderElementKind, alignment: .top)
         header.pinToVisibleBounds = true
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
-    
         return section
     }
 }
