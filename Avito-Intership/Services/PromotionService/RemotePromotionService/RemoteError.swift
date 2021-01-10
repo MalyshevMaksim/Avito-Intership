@@ -5,7 +5,6 @@
 //  Created by Малышев Максим Алексеевич on 1/5/21.
 //
 
-import Foundation
 
 enum RemoteError: Error {
     

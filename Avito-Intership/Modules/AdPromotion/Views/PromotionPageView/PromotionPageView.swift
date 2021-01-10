@@ -10,8 +10,9 @@ import UIKit
 
 final class PromotionPageView: UIView, PromotionPageViewProtocol {
     
-    private var displayManager = PromotionDataDisplayManager()
-    var delegate: PromotionPageViewDelegate?
+    weak var output: PromotionPageViewControllerOutput?
+    var delegate = PromotionCollectionViewDelegate()
+    var dataSource = PromotionCollectionViewDataSource()
     
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -23,8 +24,8 @@ final class PromotionPageView: UIView, PromotionPageViewProtocol {
     private lazy var promotionCollection: PromotionListView = {
         let promotionsList = PromotionListView()
         promotionsList.backgroundColor = .systemBackground
-        promotionsList.dataSource = displayManager
-        promotionsList.delegate = displayManager
+        promotionsList.dataSource = dataSource
+        promotionsList.delegate = delegate
         promotionsList.translatesAutoresizingMaskIntoConstraints = false
         return promotionsList
     }()
@@ -41,29 +42,36 @@ final class PromotionPageView: UIView, PromotionPageViewProtocol {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        displayManager.delegate = self
+        delegate.delegate = self
         selectionButton.addTarget(self, action: #selector(chooseButtonClicked), for: .touchUpInside)
         setupView()
-    }
-    
-    @objc private func chooseButtonClicked() {
-        guard let indexPath = promotionCollection.indexPathsForSelectedItems?.first else {
-            delegate?.didChooseButtonClicked(self, with: nil)
-            return
-        }
-        let promotion = displayManager.getPromotion(from: indexPath)
-        delegate?.didChooseButtonClicked(self, with: promotion)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc private func chooseButtonClicked() {
+        guard let indexPath = promotionCollection.indexPathsForSelectedItems?.first else {
+            output?.didChooseButtonClicked(selectedPromotion: nil)
+            return
+        }
+        let promotion = dataSource.getPromotion(at: indexPath)
+        output?.didChooseButtonClicked(selectedPromotion: promotion)
+    }
+    
     func configure(page: PromotionPage) {
         DispatchQueue.main.async { [unowned self] in
-            displayManager.setPromotionPage(promotion: page)
+            dataSource.promotionPage = page
             selectionButton.setTitle(page.actionTitle, for: .normal)
             promotionCollection.reloadData()
+        }
+    }
+    
+    func displayIcon(icon: UIImage, promotion: Promotion) {
+        DispatchQueue.main.async { [unowned self] in
+            let cell = dataSource.cellForItem(at: promotion)
+            cell?.displayIcon(icon)
         }
     }
     
@@ -98,17 +106,17 @@ final class PromotionPageView: UIView, PromotionPageViewProtocol {
     }
 }
 
-extension PromotionPageView: DisplayManagerDelegate {
+extension PromotionPageView: Cellable {
     
-    func didCellSelected(_ displayManager: PromotionDataDisplayManager, with title: String) {
+    func didCellSelected(_ displayManager: PromotionCollectionViewDelegate) {
         DispatchQueue.main.async { [unowned self] in
-            selectionButton.setTitle(title, for: .normal)
+            selectionButton.setTitle(dataSource.promotionPage?.actionTitle, for: .normal)
         }
     }
     
-    func didCellDeselected(_ displayManager: PromotionDataDisplayManager, with title: String) {
+    func didCellDeselected(_ displayManager: PromotionCollectionViewDelegate) {
         DispatchQueue.main.async { [unowned self] in
-            selectionButton.setTitle(title, for: .normal)
+            selectionButton.setTitle(dataSource.promotionPage?.selectedActionTitle, for: .normal)
         }
     }
 }

@@ -7,6 +7,12 @@
 
 import UIKit.UIImage
 
-protocol PromotionPageViewControllerProtocol: class {
+protocol PromotionPageViewControllerInput: class {
     func showPromotions(_ promotionPage: PromotionPage)
+    func showIcon(icon: UIImage, for promotion: Promotion)
+}
+
+protocol PromotionPageViewControllerOutput: class {
+    func provideIcon(from promotion: Promotion)
+    func didChooseButtonClicked(selectedPromotion: Promotion?)
 }

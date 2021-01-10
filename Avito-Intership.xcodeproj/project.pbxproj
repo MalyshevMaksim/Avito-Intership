@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B503FC6825A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503FC6725A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift */; };
+		B51B2E0725AB9E7E0052131F /* PromotionCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B2E0625AB9E7E0052131F /* PromotionCollectionViewDelegate.swift */; };
+		B51B2E0A25AB9E9C0052131F /* PromotionCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B2E0925AB9E9C0052131F /* PromotionCollectionViewDataSource.swift */; };
 		B566DD3525A4A68A00B46E30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD3425A4A68A00B46E30 /* AppDelegate.swift */; };
 		B566DD3725A4A68A00B46E30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD3625A4A68A00B46E30 /* SceneDelegate.swift */; };
 		B566DD3925A4A68A00B46E30 /* PromotionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DD3825A4A68A00B46E30 /* PromotionPageViewController.swift */; };
@@ -34,12 +35,12 @@
 		B566DDE025A4E4DF00B46E30 /* PromotionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DDDF25A4E4DF00B46E30 /* PromotionListView.swift */; };
 		B566DDE325A4E4FB00B46E30 /* PromotionListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DDE225A4E4FB00B46E30 /* PromotionListHeaderView.swift */; };
 		B566DDE725A4E52D00B46E30 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B566DDE625A4E52D00B46E30 /* NSAttributedString.swift */; };
-		B58C0D8225A6ECB7002E11F8 /* PromotionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C0D8125A6ECB7002E11F8 /* PromotionDataDisplayManager.swift */; };
 		B58C0D8B25A70177002E11F8 /* PromotionPageViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C0D8A25A70177002E11F8 /* PromotionPageViewProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B503FC6725A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDisplayManagerProtocols.swift; sourceTree = "<group>"; };
+		B51B2E0625AB9E7E0052131F /* PromotionCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		B51B2E0925AB9E9C0052131F /* PromotionCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		B566DD3125A4A68A00B46E30 /* Avito-Intership.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avito-Intership.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B566DD3425A4A68A00B46E30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B566DD3625A4A68A00B46E30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +69,6 @@
 		B566DDDF25A4E4DF00B46E30 /* PromotionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionListView.swift; sourceTree = "<group>"; };
 		B566DDE225A4E4FB00B46E30 /* PromotionListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionListHeaderView.swift; sourceTree = "<group>"; };
 		B566DDE625A4E52D00B46E30 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
-		B58C0D8125A6ECB7002E11F8 /* PromotionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDataDisplayManager.swift; sourceTree = "<group>"; };
 		B58C0D8A25A70177002E11F8 /* PromotionPageViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionPageViewProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,15 +83,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B503FC6325A89615000EBFF1 /* PromotionDisplayManager */ = {
-			isa = PBXGroup;
-			children = (
-				B503FC6725A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift */,
-				B58C0D8125A6ECB7002E11F8 /* PromotionDataDisplayManager.swift */,
-			);
-			path = PromotionDisplayManager;
-			sourceTree = "<group>";
-		};
 		B566DD2825A4A68A00B46E30 = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +185,6 @@
 			children = (
 				B566DD8625A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift */,
 				B566DD3825A4A68A00B46E30 /* PromotionPageViewController.swift */,
-				B503FC6325A89615000EBFF1 /* PromotionDisplayManager */,
 				B58C0D8825A70161002E11F8 /* PromotionPageView */,
 				B566DDD525A4E45D00B46E30 /* PromotionCollectionView */,
 			);
@@ -243,6 +233,8 @@
 				B566DDDF25A4E4DF00B46E30 /* PromotionListView.swift */,
 				B566DDDC25A4E4CA00B46E30 /* PromotionListCell.swift */,
 				B566DDE225A4E4FB00B46E30 /* PromotionListHeaderView.swift */,
+				B51B2E0625AB9E7E0052131F /* PromotionCollectionViewDelegate.swift */,
+				B51B2E0925AB9E9C0052131F /* PromotionCollectionViewDataSource.swift */,
 			);
 			path = PromotionCollectionView;
 			sourceTree = "<group>";
@@ -335,16 +327,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B566DDE025A4E4DF00B46E30 /* PromotionListView.swift in Sources */,
+				B51B2E0A25AB9E9C0052131F /* PromotionCollectionViewDataSource.swift in Sources */,
 				B566DD7D25A4B11000B46E30 /* PromotionPresenter.swift in Sources */,
 				B566DD3925A4A68A00B46E30 /* PromotionPageViewController.swift in Sources */,
+				B51B2E0725AB9E7E0052131F /* PromotionCollectionViewDelegate.swift in Sources */,
 				B566DD8725A4B5B500B46E30 /* PromotionPageViewControllerProtocol.swift in Sources */,
 				B566DD5A25A4A9A000B46E30 /* Promotion.swift in Sources */,
 				B566DD3525A4A68A00B46E30 /* AppDelegate.swift in Sources */,
-				B503FC6825A896B9000EBFF1 /* PromotionDisplayManagerProtocols.swift in Sources */,
 				B566DDCD25A4E40B00B46E30 /* BasePromotionRouter.swift in Sources */,
 				B566DD5E25A4A9EF00B46E30 /* RemotePromotionService.swift in Sources */,
 				B566DDDD25A4E4CA00B46E30 /* PromotionListCell.swift in Sources */,
-				B58C0D8225A6ECB7002E11F8 /* PromotionDataDisplayManager.swift in Sources */,
 				B58C0D8B25A70177002E11F8 /* PromotionPageViewProtocols.swift in Sources */,
 				B566DD7A25A4B0E600B46E30 /* PromotionPresenterProtocols.swift in Sources */,
 				B566DD5425A4A97C00B46E30 /* PromotionResult.swift in Sources */,

@@ -6,7 +6,6 @@
 //
 
 import Foundation.NSError
-import UIKit
 
 protocol PromotionPresenterInput {
     
@@ -14,5 +13,5 @@ protocol PromotionPresenterInput {
     func showErrorAlert(with error: NSError)
     
     func retrievePromtions()
-    func retrieveIcon(for promotion: Promotion) -> UIImage
+    func retrieveIcon(for promotion: Promotion)
 }

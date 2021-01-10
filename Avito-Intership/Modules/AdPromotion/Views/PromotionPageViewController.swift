@@ -9,16 +9,27 @@ import UIKit
 
 final class PromotionPageViewController: UIViewController {
     
-    private var pageView = PromotionPageView()
     var presenter: PromotionPresenterInput?
+    private var pageView = PromotionPageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
-        pageView.delegate = self
+        pageView.isHidden = true
+        pageView.output = self
+        pageView.dataSource.output = self
         presenter?.retrievePromtions()
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.async { [unowned self] in
+            UIView.transition(with: pageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                pageView.isHidden = false
+            })
+        }
     }
     
     private func setupView() {
@@ -34,16 +45,28 @@ final class PromotionPageViewController: UIViewController {
     }
 }
 
-extension PromotionPageViewController: PromotionPageViewDelegate {
+extension PromotionPageViewController: PromotionPageViewControllerInput  {
     
-    func didChooseButtonClicked(_ promotionPageView: PromotionPageView, with selectedPromotion: Promotion?) {
-        presenter?.showPromotionDetail(with: selectedPromotion)
+    func downloadImage(for promotion: Promotion) {
+        presenter?.retrieveIcon(for: promotion)
+    }
+    
+    func showIcon(icon: UIImage, for promotion: Promotion) {
+        pageView.displayIcon(icon: icon, promotion: promotion)
+    }
+
+    func showPromotions(_ promotionPage: PromotionPage) {
+        pageView.configure(page: promotionPage)
     }
 }
 
-extension PromotionPageViewController: PromotionPageViewControllerProtocol {
+extension PromotionPageViewController: PromotionPageViewControllerOutput {
+   
+    func didChooseButtonClicked(selectedPromotion: Promotion?) {
+        presenter?.showPromotionDetail(with: selectedPromotion)
+    }
     
-    func showPromotions(_ promotionPage: PromotionPage) {
-        pageView.configure(page: promotionPage)
+    func provideIcon(from promotion: Promotion) {
+        presenter?.retrieveIcon(for: promotion)
     }
 }

@@ -10,12 +10,9 @@ import UIKit.UIImage
 
 final class PromotionPresenter: PromotionPresenterInput {
     
-    weak var view: PromotionPageViewControllerProtocol?
+    weak var view: PromotionPageViewControllerInput?
     private var interactor: PromotionInteractorInput
     private var router: RouterInput
-    
-    // Словарь хранит соответствие id объявления и его иконки
-    private var receivedIcons: [String : UIImage] = [:]
     
     init(interactor: PromotionInteractorInput, router: RouterInput) {
         self.interactor = interactor
@@ -34,19 +31,19 @@ final class PromotionPresenter: PromotionPresenterInput {
         interactor.retrievePromotions()
     }
     
-    func retrieveIcon(for promotion: Promotion) -> UIImage {
-        guard let icon = receivedIcons[promotion.id] else {
-            interactor.retrieveIcon(for: promotion)
-            return UIImage(named: "checkmark")!
-        }
-        return icon
+    func retrieveIcon(for promotion: Promotion) {
+        interactor.retrieveIcon(for: promotion)
     }
 }
 
 extension PromotionPresenter: PromotionInteractorOutput {
     
-    func didRetrieveIcon(_ icon: UIImage, for promotion: Promotion) {
-        receivedIcons[promotion.id] = icon
+    func didRetrieveIcon(_ iconData: Data, for promotion: Promotion) {
+        guard let icon = UIImage(data: iconData) else {
+            showErrorAlert(with: RemoteError.badData(reason: "Не удалось получить изображение") as NSError)
+            return
+        }
+        view?.showIcon(icon: icon, for: promotion)
     }
     
     func didRetrievePromotions(_ promotions: PromotionResult) {

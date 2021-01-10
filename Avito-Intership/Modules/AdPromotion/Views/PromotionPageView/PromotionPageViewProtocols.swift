@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 protocol PromotionPageViewProtocol: class {
     func configure(page: PromotionPage)

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit.UIImage
 
 final class RemotePromotionService: PromotionServiceProtocol {
     
@@ -37,7 +36,7 @@ final class RemotePromotionService: PromotionServiceProtocol {
         }
     }
     
-    func fetchPicutre(for promotion: Promotion, completion: @escaping (Result<UIImage, Error>) -> ()) {
+    func fetchPicutre(for promotion: Promotion, completion: @escaping (Result<Data, Error>) -> ()) {
         
         guard let url = URL(string: promotion.icon.url) else {
             completion(.failure(RemoteError.badUrl(reason: "")))
@@ -56,11 +55,7 @@ final class RemotePromotionService: PromotionServiceProtocol {
                 completion(.failure(RemoteError.badData(reason: "")))
                 return
             }
-            guard let picture = UIImage(data: data) else {
-                completion(.failure(RemoteError.badDecode(reason: "")))
-                return
-            }
-            completion(.success(picture))
+            completion(.success(data))
         }
         dataTask.resume()
     }
