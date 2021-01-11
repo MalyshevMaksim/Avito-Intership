@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-final class PromotionListView: UICollectionView {
+final class PromotionCollectionView: UICollectionView {
 
     static let sectionHeaderElementKind = "section-header-element-kind"
     
     init() {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         collectionViewLayout = generateLayout()
-        register(PromotionListCell.self, forCellWithReuseIdentifier: PromotionListCell.reuseIdentifier)
-        register(PromotionListViewHeader.self, forSupplementaryViewOfKind: PromotionListView.sectionHeaderElementKind, withReuseIdentifier: PromotionListViewHeader.reuseIdentifier)
+        register(PromotionCollectionViewCell.self, forCellWithReuseIdentifier: PromotionCollectionViewCell.reuseIdentifier)
+        register(PromotionCollectionViewHeader.self, forSupplementaryViewOfKind: PromotionCollectionView.sectionHeaderElementKind, withReuseIdentifier: PromotionCollectionViewHeader.reuseIdentifier)
         showsVerticalScrollIndicator = false
     }
  
@@ -40,7 +40,7 @@ final class PromotionListView: UICollectionView {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PromotionListView.sectionHeaderElementKind, alignment: .top)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PromotionCollectionView.sectionHeaderElementKind, alignment: .top)
         header.pinToVisibleBounds = true
 
         let section = NSCollectionLayoutSection(group: group)

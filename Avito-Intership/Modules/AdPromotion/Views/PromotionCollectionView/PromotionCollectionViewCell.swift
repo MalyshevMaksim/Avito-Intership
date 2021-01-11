@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-protocol PromotionListCellProtocol: UICollectionViewCell {
+protocol PromotionCollectionCellProtocol: UICollectionViewCell {
     
     func displayIcon(_ icon: UIImage)
     func configure(with promotion: Promotion)
 }
 
-final class PromotionListCell: UICollectionViewCell, PromotionListCellProtocol {
+final class PromotionCollectionViewCell: UICollectionViewCell, PromotionCollectionCellProtocol {
     
     static var reuseIdentifier = "PromotionListCell"
     

@@ -8,9 +8,9 @@
 
 enum RemoteError: Error {
     
-    case badUrl(reason: String)
-    case badData(reason: String)
-    case badResponse(reason: String)
-    case badStatusCode(reason: String)
-    case badDecode(reason: String)
+    case badUrl
+    case badData
+    case badResponse
+    case badStatusCode
+    case badDecode
 }

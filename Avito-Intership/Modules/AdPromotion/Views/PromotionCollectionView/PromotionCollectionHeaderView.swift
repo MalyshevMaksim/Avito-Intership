@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class PromotionListViewHeader: UICollectionReusableView {
+final class PromotionCollectionViewHeader: UICollectionReusableView {
     
     static var reuseIdentifier = "PromotionListViewHeader"
     

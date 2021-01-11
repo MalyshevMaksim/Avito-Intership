@@ -40,7 +40,7 @@ extension PromotionPresenter: PromotionInteractorOutput {
     
     func didRetrieveIcon(_ iconData: Data, for promotion: Promotion) {
         guard let icon = UIImage(data: iconData) else {
-            showErrorAlert(with: RemoteError.badData(reason: "Не удалось получить изображение") as NSError)
+            showErrorAlert(with: RemoteError.badData as NSError)
             return
         }
         view?.showIcon(icon: icon, for: promotion)

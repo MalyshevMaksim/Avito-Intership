@@ -21,8 +21,8 @@ final class PromotionPageView: UIView, PromotionPageViewProtocol {
         return button
     }()
     
-    private lazy var promotionCollection: PromotionListView = {
-        let promotionsList = PromotionListView()
+    private lazy var promotionCollection: PromotionCollectionView = {
+        let promotionsList = PromotionCollectionView()
         promotionsList.backgroundColor = .systemBackground
         promotionsList.dataSource = dataSource
         promotionsList.delegate = delegate
@@ -106,15 +106,15 @@ final class PromotionPageView: UIView, PromotionPageViewProtocol {
     }
 }
 
-extension PromotionPageView: Cellable {
+extension PromotionPageView: CellSelectableDelegate {
     
-    func didCellSelected(_ displayManager: PromotionCollectionViewDelegate) {
+    func didCellSelected(_ collectionView: UICollectionView, _ didCellSelected: PromotionCollectionCellProtocol) {
         DispatchQueue.main.async { [unowned self] in
             selectionButton.setTitle(dataSource.promotionPage?.actionTitle, for: .normal)
         }
     }
     
-    func didCellDeselected(_ displayManager: PromotionCollectionViewDelegate) {
+    func didCellDeselected(_ collectionView: UICollectionView, _ didCellDeselected: PromotionCollectionCellProtocol) {
         DispatchQueue.main.async { [unowned self] in
             selectionButton.setTitle(dataSource.promotionPage?.selectedActionTitle, for: .normal)
         }

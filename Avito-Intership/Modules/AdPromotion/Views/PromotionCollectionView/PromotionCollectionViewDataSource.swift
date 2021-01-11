@@ -8,23 +8,17 @@
 import Foundation
 import UIKit
 
-protocol Cellable {
-    
-    func didCellSelected(_ displayManager: PromotionCollectionViewDelegate)
-    func didCellDeselected(_ displayManager: PromotionCollectionViewDelegate)
-}
-
 final class PromotionCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     weak var output: PromotionPageViewControllerOutput?
     var promotionPage: PromotionPage?
-    private var cells: [String : PromotionListCellProtocol] = [:]
+    private var cells: [String : PromotionCollectionCellProtocol] = [:]
     
     func getPromotion(at indexPath: IndexPath) -> Promotion? {
         return promotionPage?.list[indexPath.row]
     }
     
-    func cellForItem(at promotion: Promotion) -> PromotionListCellProtocol? {
+    func cellForItem(at promotion: Promotion) -> PromotionCollectionCellProtocol? {
         return cells[promotion.id]
     }
     
@@ -33,7 +27,7 @@ final class PromotionCollectionViewDataSource: NSObject, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromotionListCell.reuseIdentifier, for: indexPath) as? PromotionListCellProtocol,
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromotionCollectionViewCell.reuseIdentifier, for: indexPath) as? PromotionCollectionCellProtocol,
               let promotion = promotionPage?.list[indexPath.row] else {
             return UICollectionViewCell()
         }
@@ -44,9 +38,9 @@ final class PromotionCollectionViewDataSource: NSObject, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let kind = PromotionListView.sectionHeaderElementKind
-        let reuseIdentitfier = PromotionListViewHeader.reuseIdentifier
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentitfier, for: indexPath) as! PromotionListViewHeader
+        let kind = PromotionCollectionView.sectionHeaderElementKind
+        let reuseIdentitfier = PromotionCollectionViewHeader.reuseIdentifier
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentitfier, for: indexPath) as! PromotionCollectionViewHeader
         header.label.text = promotionPage?.title
         return header
     }
