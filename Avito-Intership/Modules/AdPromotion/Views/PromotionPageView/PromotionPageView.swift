@@ -18,6 +18,7 @@ final class PromotionPageView: UIView, PromotionPageViewProtocol {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "close"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false
         return button
     }()
     
