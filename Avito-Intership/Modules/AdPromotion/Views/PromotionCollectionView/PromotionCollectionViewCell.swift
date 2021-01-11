@@ -102,7 +102,9 @@ final class PromotionCollectionViewCell: UICollectionViewCell, PromotionCollecti
     
     func displayIcon(_ icon: UIImage) {
         DispatchQueue.main.async { [unowned self] in
-            self.icon.image = icon
+            UIView.transition(with: self, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                self.icon.image = icon
+            })
         }
     }
     
